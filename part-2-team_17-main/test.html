@@ -1,0 +1,2013 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width"/>
+        <meta name="description" content="Internal Productivity and Management system for employeews as part of Make-It-All.">
+
+        <title>Make It All - Dashboard</title>
+
+        <!-- Icon & CSS & JS-->
+        <link rel="icon" type="image/x-icon" href="static/favicon.png">
+        <link href="static/styles.css" rel="stylesheet">
+        <script src="scripts.js"></script>
+        
+
+        <!-- Fonts (Inter) -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+        <!-- Chart JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+    </head>
+
+    <body class="m-0" style="background-color: var(--bg-colour);">
+        
+        <header id="navabar-wrapper" class="w-100">
+
+            <nav class="navbar" style="background-color: var(--secondary-colour);">
+
+                <!-- Navbar Row 1, Brand & User -->
+                <section id="nav-row-1" class="container-fluid">
+                    <a class="navbar-brand d-flex align-items-center" href="index.html" rel="noopener noreferrer">
+
+                        <span class="h4 mb-0 primary-text">Make-It-All</span>
+
+                    </a>
+
+                    <div id="user-options" class="dropdown">
+
+                        <button
+                        id="btn-user-options"
+                        class="btn d-flex align-items-center primary-text dropdown-toggle"
+                        type="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                        >
+                            <div class="position-relative mt-1 me-3">
+                                <!-- Switch to notification-0.png if 0 notif-->
+                                <img src="static/notification.png" alt="Notifications" style="width: 24px; height: auto;">
+                                <!-- Hide if there are 0 notifictions-->
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
+                                    3
+                                </span>
+                            </div>
+                            <span id="navbar-username" class="me-2">Username</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a id="lbl-notification-count" class="dropdown-item" href="#">Notifications (0)</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+
+                    </div>
+                    
+                </section>
+                
+                <!-- Navbar Row 2, User Redirects-->
+                <section id="nav-row-2" class="w-100 d-flex flex-wrap justify-content-between nav-buttons" style="background-color: var(--secondary-colour);">
+                    <a class="btn nav-btn flex-grow-1 text-center" id="btn-dashboard" href="#" style="background-color: var(--primary-btn);">Dashboard</a>
+                    <a class="btn nav-btn flex-grow-1 text-center" id="btn-mytasks" href="#">My Tasks</a>
+                    <a class="btn nav-btn flex-grow-1 text-center" id="btn-projects" href="#">Projects</a>
+                    <a class="btn nav-btn flex-grow-1 text-center" id="btn-knowledge" href="#">Knowledge</a>
+                </section>
+
+            </nav>
+        </header>
+
+        <main>
+
+            <!-- Dashboard: Login Panel -->
+            <section id="login" class="panel mx-auto p-3 secondary-text">
+
+                <img src="static/banner.png" alt="Make-It-All Banner" class="img-fluid d-block mx-auto mb-3" style="width:60%; max-width:95%;">
+
+                <form id="login-form" class="d-flex flex-column mx-auto w-50">
+
+                    <div id="email" class="mb-3">
+                        <label for="inp-email"><h5>Email address</h5></label>
+                        <input type="email" class="form-control" id="inp-email" aria-describedby="email-help">
+                        <div id="email-help" class="form-text">Use your company email.</div>
+                    </div>
+
+                    <section id="password">
+                        
+                        <div class="mb-3">
+                            <label for="inp-password"><h5>Password</h5></label>
+                            <input type="password" class="form-control" id="inp-password">
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="show-password">
+                            <label class="form-check-label" for="show-password">Show Password</label>
+                        </div>
+
+                    </section>
+
+                    <button type="submit" class="btn btn-primary mb-3 mx-auto" style="width: 200px;">Login</button>
+                    <button type="submit" class="btn btn-secondary mx-auto" style="width: 200px;">Activate Account</button>
+                </form>
+
+            </section>  
+
+            <!-- Dashboard: Redirect Panel -->
+            <section id="redir" class="titled panel mx-auto">
+                <h5 class="panel-title p-3">
+                    Quick Access
+                </h5>
+
+                <div id="redir-holder" class="d-flex">
+                    
+                    <div id="redir-project-holder" class="redirect-holder">
+
+                        <!-- Main Redirect -->
+                        <div id="project-main-redir" class="main-redir card">
+                            <div class="card-body">
+                                <h1 class="card-title primary-text">My Projects</h1>
+                                
+                                <img src="static/projects-icon.png" class="redir-icon">
+                                <h3 class="card-text redir-text">View ongoing projects and manage tasks</h3>
+                                
+                                <a href="#" class="btn btn-primary w-100">Search Projects &gt;</a>
+                            </div>
+                        </div>
+
+                        <!-- Recently Accessed Projects -->
+                        <section id="recent-project-holder" class="d-flex recent-redir-holder">
+                            
+                            <div id="project-1-redir" class="card m-3 w-50">
+                                <div class="card-body">
+                                    <h4 class="card-title">Project Title 1</h4>
+                                    
+                                    <p class="card-text">Project description cut to 100 characters? Lorem ipsum dolor sit amet consectetur adipiscing elit...</p>
+                                    
+                                    <a href="#" class="btn btn-primary w-100">View Project &gt;</a>
+                                </div>
+                            </div>
+                            <div id="project-2-redir" class="card m-3 w-50">
+                                <div class="card-body">
+                                    <h4 class="card-title">Project Title 2</h4>
+                                    
+                                    <p class="card-text">Project description cut to 100 characters? Lorem ipsum dolor sit amet consectetur adipiscing elit...</p>
+                                    
+                                    <a href="#" class="btn btn-primary w-100">View Project &gt;</a>
+                                </div>
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                    <div id="redir-knowledge-holder" class="redirect-holder">
+
+                        <div id="knowledge-main-redir" class="main-redir card">
+                            <div class="card-body">
+                                <h1 class="card-title primary-text">My Knowledge</h1>
+                                
+                                <img src="static/knowledge-icon.png" class="redir-icon">
+                                <h3 class="card-text redir-text">Access resources and join discussions</h3>
+                                
+                                <a href="#" class="btn btn-primary w-100">Search Knowledge &gt;</a>
+                            </div>
+                        </div>
+
+                        <!-- Recently Accessed Knowledge -->
+                        <section id="recent-knowledge-holder" class="d-flex recent-redir-holder">
+                            
+                            <div id="knowledge-1-redir" class="card m-3 w-50">
+                                <div class="card-body">
+                                    <h4 class="card-title overflow-ellipsis">Knowledge Title 1</h4>
+                                    
+                                    <p class="card-text">Knowledge description cut to 100 characters? Lorem ipsum dolor sit amet consectetur adipiscing elit...</p>
+                                    
+                                    <a href="#" class="btn btn-primary w-100">View Knowledge &gt;</a>
+                                </div>
+                            </div>
+                            <div id="knowledge-2-redir" class="card m-3 w-50">
+                                <div class="card-body">
+                                    <h4 class="card-title overflow-ellipsis">Knowledge Title 2</h4>
+                                    
+                                    <p class="card-text">Knowledge description cut to 100 characters? Lorem ipsum dolor sit amet consectetur adipiscing elit...</p>
+                                    
+                                    <a href="#" class="btn btn-primary w-100">View Knowledge &gt;</a>
+                                </div>
+                            </div>
+
+                        </section>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- Dashboard: Metrics -->
+            <section id="metrics" class="titled panel mx-auto">
+                <h5 class="panel-title p-3">
+                    Metrics
+                </h5>
+
+                <!-- Employee Metricss-->
+                <section id="nav-row-2" class="w-100 d-flex flex-wrap justify-content-between nav-buttons" style="background-color: var(--secondary-colour);">
+                    <div class="btn nav-btn flex-grow-1 text-center" id="btn-general" style="background-color: var(--primary-btn);">General</div>
+                </section>
+
+                <!-- Employee General -->
+                <section id="employee-metrics" class="p-3">
+                    <!-- Metrics top row: Project Overview & Task Stats -->
+                    <div id="employee-general-top-row" class="d-flex flex-wrap">
+
+                        <div id="users-projects" class="p-3 d-flex flex-column col-lg-6 col-md-5 col-sm-12 justify-content-between">
+
+                            <h4 class="metric-sub-section metric-sub-section-title mt-2 p-2">Your Projects (<span id="user-project-count">1</span>)</h4>
+                            <!-- this parent div is to make scrollbar fit nicer inside container -->
+                            <div class="metric-sub-section h-100 p-3 gap-2 d-flex flex-column">
+                                <div id="user-project-container" class="metric-sub-section custom-scrollbar px-3 py-1 gap-2 d-flex flex-column">
+
+                                    <!-- User Project 1 -->
+                                    <div id="project-id" class="bg-white curved-borders p-2 d-flex flex-wrap gap-1">
+                                        <div class="w-100">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <h6 class="text-wrap"><span id="project-title">Project Title</span></h6>
+                                                <h6>Deadline: <span id="deadline">01/01/26</span></h6>
+                                            </div>
+                                            
+                                            <div id="progress-bar" class="progress m-1" role="progressbar" aria-valuenow="50">
+                                                <div id="project-progress" class="progress-bar" style="width: 50%; background-color: var(--not-complete);">50%</div>
+                                            </div>
+                                        </div>
+                                        <div class="w-100 m-1">
+                                            <button class="w-100 h-100 btn btn-primary text-nowrap">View Project Page</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="task-metrics" class="p-3 col-lg-6 col-md-7 col-sm-12 justify-content-between">
+                            <h4 class="p-2 mb-2 bold">Task Metrics</h4>
+                            <div class="d-flex justify-content-around">
+                                
+                                <div id="average-task-completed-container" class="metric-sub-section curved-borders col-7 p-3">
+                                    <div class="metric-inner-sub-section curved-borders h-100 p-2 pt-3 pb-4 d-flex flex-column justify-content-between">
+                                        <h4>You Completed</h4>
+                                        <h5>
+                                            <span id="task-variance">0.4</span><br>
+                                            <span class="red-text">Less</span> 
+                                            tasks than the<br>average employee.
+                                        </h5>
+
+                                        <div class="task-scale">
+                                            <div class="scale-bar">
+                                                <div class="segment scale-red"></div>
+                                                <div class="segment scale-orange"></div>
+                                                <div class="segment scale-yellow"></div>
+                                                <div class="segment scale-light-green"></div>
+                                                <div class="segment scale-green"></div>
+                                                <div id="task-scale-needle" style="left: 43.3333%;"></div>
+                                            </div>
+
+                                            <div class="scale-labels">
+                                                <span class="scale-extreme">3</span>
+                                                <span class="scale-mid">2</span>
+                                                <span class="scale-low">1</span>
+                                                <span>0</span>
+                                                <span class="scale-low">1</span>
+                                                <span class="scale-mid">2</span>
+                                                <span class="scale-extreme">3</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="h-100 col-4 metric-sub-section curved-borders p-2">
+                                    <div class="metric-inner-sub-section gauge-container">
+                                        <canvas id="employee-general-task-gauge" class="task-gauge"></canvas>
+                                        <script>
+                                            const completed = 9;
+                                            const total = 12;
+                                            const overdue = 1;
+
+                                            new Chart(document.getElementById("employee-general-task-gauge"), {
+                                                type: "doughnut",
+                                                data: {
+                                                    datasets: [{
+                                                        data: [completed, overdue, total - (completed + overdue)],
+                                                        backgroundColor: ["#007BFF", "#C82333", "#d9d9d9"],
+                                                        borderWidth: 0
+                                                    }]
+                                                },
+                                                options: {
+                                                    responsive: true,
+                                                    aspectRatio: 1,
+                                                    cutoutPercentage: 88,
+                                                    circumference: 1.3 * Math.PI,
+                                                    rotation: 0.85 * Math.PI,
+                                                    legend: { display: false },
+                                                    tooltips: { enabled: false },
+                                                    layout: {
+                                                        padding:0
+                                                    }
+                                                }
+                                            });
+                                        </script>
+                                        <div class="gauge-text-overlay">
+                                            <h1 id="user-task-count" class="mt-3">
+                                                <span id="users-completed-task-count">9</span>/<span id="users-total-task-count">12</span>
+                                            </h1>
+                                            <h2 id="tasks-completed">Tasks<br>Completed</h2>
+                                        </div>
+                                        
+                                    </div>
+                                    <h4 class="red-pop-out-text">Expected Tasks: <span id="user-expected-task-count">10</span></h4>
+                                    
+                                </div>
+
+                                
+
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <!-- Metrics bottom row: Overdue Tasks -->
+                    <div id="overdue-tasks" class="p-3">
+                        <div class="metric-sub-section metric-sub-section-title p-2">
+                            <h4>Overdue Tasks (<span id="user-overdue-tasks">1</span>)</h4>
+                        </div>
+                        <div class="metric-sub-section p-3 gap-2 d-flex flex-column">
+                            <div id="overdue-tasks-container" class="metric-sub-section custom-scrollbar px-3 py-1 gap-2 d-flex flex-column">
+
+                                <!-- Tasks -->    
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                 <section id="nav-row-2" class="w-100 d-flex flex-wrap justify-content-between nav-buttons" style="background-color: var(--secondary-colour);">
+                    <a class="btn nav-btn flex-grow-1 text-center" id="btn-general" href="#" style="background-color: var(--primary-btn);">General</a>
+                    <a class="btn nav-btn flex-grow-1 text-center" id="btn-project-management" href="#">Project Management</a>
+                    <a class="btn nav-btn flex-grow-1 text-center" id="btn-employee-overview" href="#">Employee Overview</a>
+                </section>
+
+                
+                <!-- Manager Metrics -->
+                <section id="manager-metrics" class="p-3">
+
+                    <!-- Manager General -->
+                    
+                    <div id="manager-general">
+                        <!-- Metrics top row: Project Overview & Task Stats -->
+                    <div id="manager-general-top-row" class="d-flex flex-wrap justify-content-between p-3 pt-2">
+                        <div class="p-3 pt-0 d-flex flex-column justify-content-between col-lg-3 col-md-3 col-sm-12 flex-grow-1">
+                            <div class="d-flex flex-wrap justify-content-center me-0 gap-4">
+                                <div class="metric-sub-section curved-borders p-2 col-lg-10 col-md-10 col-sm-6">
+                                    <h4 class="p-2 mb-2 fw-bold text-center">Task This Month</h4>
+                                    <div class="metric-inner-sub-section gauge-container">
+                                        <canvas id="manager-general-task-gauge" class="task-gauge"></canvas>
+                                        <script>
+
+                                            //Different values for different gauges.
+
+                                            new Chart(document.getElementById("manager-general-task-gauge"), {
+                                                type: "doughnut",
+                                                data: {
+                                                    datasets: [{
+                                                        data: [completed, overdue, total - (completed + overdue)],
+                                                        backgroundColor: ["#007BFF", "#C82333", "#d9d9d9"],
+                                                        borderWidth: 0
+                                                    }]
+                                                },
+                                                options: {
+                                                    responsive: true,
+                                                    aspectRatio: 1,
+                                                    cutoutPercentage: 88,
+                                                    circumference: 1.3 * Math.PI,
+                                                    rotation: 0.85 * Math.PI,
+                                                    legend: { display: false },
+                                                    tooltips: { enabled: false },
+                                                    layout: {
+                                                        padding: 0
+                                                    }
+                                                }
+                                            });
+                                        </script>
+                                        <div class="gauge-text-overlay">
+                                            <h1 id="user-task-count" class="mt-3">
+                                                <span id="users-completed-task-count">9</span>/<span id="users-total-task-count">12</span>
+                                            </h1>
+                                            <h2 id="tasks-completed">Tasks<br>Completed</h2>
+                                        </div>
+
+                                    </div>
+                                    <h4 class="red-pop-out-text">Expected Tasks: <span id="user-expected-task-count">10</span></h4>
+
+                                </div>
+
+                                <div id="company-statistics" class="metric-sub-section curved-borders col-lg-12 col-md-12 col-sm-5 p-3 ">
+                                    <div class="metric-inner-sub-section curved-borders h-100 p-2 pt-3 pb-4 d-flex flex-column justify-content-between">
+                                        <div class="metric-segment">
+                                            <h4>Employee Count:</h4>
+                                            <span id="employee-count" class="metric-value">78</span>
+                                        </div>
+
+                                        <hr class="metric-divider">
+
+                                        <div class="metric-segment">
+                                            <h4 class="metric-label">Active Projects:</h4>
+                                            <span id="active-projects" class="metric-value">78</span>
+                                        </div>
+
+                                        <hr class="metric-divider">
+
+                                        <div class="metric-segment">
+                                            <h4 class="metric-label">Knowledge Posts:</h4>
+                                            <span id="knowledge-posts" class="metric-value">78</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="p-3 pt-0 d-flex flex-column col-lg-9 col-md-9 col-sm-12 flex-grow-1">
+                            <div class="metric-sub-section curved-borders d-flex justify-content-center mb-3 w-100">
+                                <div class="graph-container curved-borders m-4 px-5 py-3">
+                                    <canvas id="general-graph"></canvas>
+                                    <script>
+                                        const allMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                                        const currentMonthIndex = new Date().getMonth();
+
+                                        /* Slicing labels and data to start from the current month */
+                                        const dynamicLabels = allMonths.slice(currentMonthIndex);
+                                        const completedData = [2, 5, 7, 10, 12, 13, 14, 15, 17, 19, 21, 23].slice(currentMonthIndex);
+                                        const expectedData = [3, 5, 7, 10, 11, 13, 14, 16, 18, 20, 21, 23].slice(currentMonthIndex);
+
+                                        const barColors = completedData.map((val, i) => {
+                                            if (val > expectedData[i]) return "#28a745";//green
+                                            if (val < expectedData[i]) return "#C82333";//red
+                                            return "#007BFF";//blue
+                                        });
+
+                                        var ctx = document.getElementById('general-graph').getContext('2d');
+                                        var taskChart = new Chart(ctx, {
+                                            type: 'bar',
+                                            data: {
+                                                labels: dynamicLabels,
+                                                datasets: [
+                                                    {
+                                                        label: 'Expected Tasks',
+                                                        type: 'line',
+                                                        data: expectedData,
+                                                        fill: false,
+                                                        borderColor: '#333',
+                                                        borderDash: [5, 5],
+                                                        pointStyle: 'rectRot',
+                                                        lineTension: 0.3
+                                                    },
+                                                    {
+                                                        label: 'Tasks Completed',
+                                                        data: completedData,
+                                                        backgroundColor: barColors,
+                                                        borderWidth: 1
+                                                    }
+                                                ]
+                                            },
+                                            options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
+                                                legend: {
+                                                    display: true,
+                                                    position: 'bottom',
+                                                    labels: {
+                                                        usePointStyle: true,
+                                                        padding: 20,
+                                                        fontStyle: 'bold'
+                                                    }
+                                                },
+                                                scales: {
+                                                    yAxes: [{
+                                                        ticks: { beginAtZero: true, stepSize: 2 }
+                                                    }],
+                                                    xAxes: [{
+                                                        gridLines: { display: false }
+                                                    }]
+                                                }
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+
+                            <div id="overdue-tasks" class="w-100 flex-grow-1 d-flex flex-column minh-0">
+                                <div class="metric-sub-section metric-sub-section-title p-2">
+                                    <h4>Overdue Tasks (<span id="user-overdue-tasks">1</span>)</h4>
+                                </div>
+
+                                <div class="metric-sub-section p-3 gap-2 w-100 d-flex flex-column flex-grow-1 minh-0">
+                                    
+                                    <div id="overdue-tasks-container" 
+                                        class="metric-sub-section custom-scrollbar px-3 py-1 gap-2 d-flex flex-column flex-grow-1 minh-0">
+
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="manager-general-bottom-row" class="p-3 pt-0">
+                        <div id="employees-for-training" class="p-3 d-flex flex-column w-100">
+                            <h4 class="metric-sub-section metric-sub-section-title mt-2 p-2">Employees for Training (<span id="employess-for-training-count">1</span>)</h4>
+                            <!-- this parent div is to make scrollbar fit nicer inside container -->
+                            <div class="metric-sub-section h-100 p-3 g-2 d-flex flex-column">
+                                <div id="employess-for-training-container" class="metric-sub-section custom-scrollbar px-3 py-1 d-flex flex-wrap justify-content-around">
+                                    <div class="panel p-4 d-flex justify-content-between flex-column col-lg-5 col-md-12 col-sm-12">
+                                        <span class="content-box p-2 px-4 m-0 gap-2">User 1 <span class="badge bg-non-technical ms-3">Team Leader</span></span>
+                                        <div>
+                                            <div class="h-100 p-2 pt-3 pb-4 d-flex flex-column justify-content-between align-items-center">
+                                                <h4 class="text-center">Average Monthly Tasks</h4>
+                                                <h5>
+                                                    <span id="task-variance">-0.4</span><br>
+                                                </h5>
+
+                                                <div class="task-scale">
+                                                    <div class="scale-bar">
+                                                        <div class="segment scale-red"></div>
+                                                        <div class="segment scale-orange"></div>
+                                                        <div class="segment scale-yellow"></div>
+                                                        <div class="segment scale-light-green"></div>
+                                                        <div class="segment scale-green"></div>
+                                                        <div id="task-scale-needle" style="left: 43.3333%;"></div>
+                                                    </div>
+
+                                                    <div class="scale-labels">
+                                                        <span class="scale-extreme">3</span>
+                                                        <span class="scale-mid">2</span>
+                                                        <span class="scale-low">1</span>
+                                                        <span>0</span>
+                                                        <span class="scale-low">1</span>
+                                                        <span class="scale-mid">2</span>
+                                                        <span class="scale-extreme">3</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-wrap justify-content-center">
+                                            <button class="w-100 btn btn-primary text-nowrap mb-2">View Employee's Page</button>
+
+                                            <button class="btn btn-danger text-nowrap notify-buttons mb-2 flex-grow-1">
+                                                Notify Employee
+                                            </button>
+                                            <div class="button-divider"></div>
+                                            <button class="btn btn-danger text-nowrap notify-buttons mb-2 flex-grow-1">
+                                                Notify Employee's Team Leader
+                                            </button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <div id="manager-project">
+                        <select name="project" id="project" style="width: 150px;">
+                            <option selected="" disabled="">Select Project</option>
+                            <option value="1">Project 1</option>
+                            <option value="2">Project 2</option>
+                            <option value="3">Project 3</option>
+                        </select>
+
+                        <div id="current-project" class="titled panel">
+                            <h2 class="panel-title">Project Name</h2>
+                            <div class="d-flex justify-content-between flex-column p-5">
+                                <div class="metric-inner-sub-section w-100 curved-borders d-flex p-3 gap-2 d-flex justify-content-between flex-row">   
+                                    <div class="metric-sub-section curved-borders p-2 col-2">
+                                        <h4 class="p-2 mb-2 fw-bold text-center">Project Tasks</h4>
+
+                                        <div class="metric-inner-sub-section gauge-container">
+                                            <canvas id="manager-project-task-gauge" class="task-gauge"></canvas>
+                                            <script>
+
+                                                //Different values for different gauges.
+
+                                                new Chart(document.getElementById("manager-project-task-gauge"), {
+                                                    type: "doughnut",
+                                                    data: {
+                                                        datasets: [{
+                                                            data: [completed, overdue, total - (completed + overdue)],
+                                                            backgroundColor: ["#007BFF", "#C82333", "#d9d9d9"],
+                                                            borderWidth: 0
+                                                        }]
+                                                    },
+                                                    options: {
+                                                        responsive: true,
+                                                        aspectRatio: 1,
+                                                        cutoutPercentage: 88,
+                                                        circumference: 1.3 * Math.PI,
+                                                        rotation: 0.85 * Math.PI,
+                                                        legend: { display: false },
+                                                        tooltips: { enabled: false },
+                                                        layout: {
+                                                            padding: 0
+                                                        }
+                                                    }
+                                                });
+                                            </script>
+                                            <div class="gauge-text-overlay">
+                                                <h1 id="user-task-count" class="mt-3">
+                                                    <span id="users-completed-task-count">9</span>/<span id="users-total-task-count">12</span>
+                                                </h1>
+                                                <h2 id="tasks-completed">Tasks<br>Completed</h2>
+                                            </div>
+
+                                        </div>
+                                        <h4 class="red-pop-out-text">Expected Tasks: <span id="user-expected-task-count">10</span></h4>
+
+                                    </div>
+
+                                    <div id="users-containers" class="curved-borders panel col-9 fill-y d-flex flex-wrap p-3">
+                                        <h4 class="fw-bold w-100 text-start mx-3">Overseeing Team (<span id="uppers">1</span>)</h4>
+                                        <span id="upper-container" class="d-flex flex-wrap gap-1">
+                                            <!-- Managers and team leaders here-->
+                                            <span class="content-box p-2 px-4 m-1">User 1ㅤ<span class="badge bg-non-technical">Team Leader</span></span>
+                                        </span>
+                                        <span class="seperator"></span>
+                                        
+                                        <h4 class="fw-bold w-100 text-start mx-3">Project Team (<span id="lowers">1</span>)</h4>
+
+                                        <span id="upper-container">
+                                            <!-- others here-->
+                                            <span class="content-box p-2 px-4 mx-3 gap-2">User 2</span>
+                                        </span>
+                                        
+                                    </div>
+                                </div>
+                                <br>
+                                <h4 class="fw-bold">Project Statistics</h4>
+
+                                <div class="metric-sub-section curved-borders d-flex justify-content-center p-1 m-3 w-100">
+                                    <div class="graph-container m-5">
+                                        <canvas id="project-graph"></canvas>
+                                        <script>
+                                            var ctx = document.getElementById('project-graph').getContext('2d');
+                                            var taskChart = new Chart(ctx, {
+                                                type: 'bar',
+                                                data: {
+                                                    labels: dynamicLabels,
+                                                    datasets: [
+                                                        {
+                                                            label: 'Expected Tasks',
+                                                            type: 'line',
+                                                            data: expectedData,
+                                                            fill: false,
+                                                            borderColor: '#333',
+                                                            borderDash: [5, 5],
+                                                            pointStyle: 'rectRot',
+                                                            lineTension: 0.3
+                                                        },
+                                                        {
+                                                            label: 'Tasks Completed',
+                                                            data: completedData,
+                                                            backgroundColor: barColors,
+                                                            borderWidth: 1
+                                                        }
+                                                    ]
+                                                },
+                                                options: {
+                                                    responsive: true,
+                                                    maintainAspectRatio: false,
+                                                    legend: {
+                                                        display: true,
+                                                        position: 'bottom',
+                                                        labels: {
+                                                            usePointStyle: true,
+                                                            padding: 20,
+                                                            fontStyle: 'bold'
+                                                        }
+                                                    },
+                                                    scales: {
+                                                        yAxes: [{
+                                                            ticks: { beginAtZero: true, stepSize: 2 }
+                                                        }],
+                                                        xAxes: [{
+                                                            gridLines: { display: false }
+                                                        }]
+                                                    }
+                                                }
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-around">
+                                    <button class="btn btn-primary col-5 text-nowrap m-1">View Project Page</button>
+                                    <button class="btn btn-primary col-5 text-nowrap m-1">View All Projects</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="manager-employee p-3">
+                        <select name="employee" id="employee" style="width: 180px;">
+                            <option selected="" disabled="">Select Employee</option>
+                            <option value="1">Employee 1</option>
+                            <option value="2">Employee 2</option>
+                            <option value="3">Employee 3</option>
+                        </select>
+
+                    <!-- Metrics top row: Project Overview & Task Stats -->
+                    <div id="manager-employee-top-row" class="d-flex flex-wrap">
+
+                        <div id="users-projects" class="p-3 d-flex flex-column col-lg-6 col-md-5 col-sm-12 justify-content-between">
+
+                            <h4 class="metric-sub-section metric-sub-section-title mt-2 p-2">Your Projects (<span id="user-project-count">1</span>)</h4>
+                            <!-- this parent div is to make scrollbar fit nicer inside container -->
+                            <div class="metric-sub-section h-100 p-3 gap-2 d-flex flex-column">
+                                <div id="user-project-container" class="metric-sub-section custom-scrollbar px-3 py-1 gap-2 d-flex flex-column">
+
+                                    <!-- User Project 1 -->
+                                    <div id="project-id" class="bg-white curved-borders p-2 d-flex flex-wrap gap-1">
+                                        <div class="w-100">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <h6 class="text-wrap"><span id="project-title">Project Title</span></h6>
+                                                <h6>Deadline: <span id="deadline">01/01/26</span></h6>
+                                            </div>
+                                            
+                                            <div id="progress-bar" class="progress m-1" role="progressbar" aria-valuenow="50">
+                                                <div id="project-progress" class="progress-bar" style="width: 50%; background-color: var(--not-complete);">50%</div>
+                                            </div>
+                                        </div>
+                                        <div class="w-100 m-1">
+                                            <button class="w-100 h-100 btn btn-primary text-nowrap">View Project Page</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div id="task-metrics" class="p-3 col-lg-6 col-md-7 col-sm-12 justify-content-between">
+                            <h4 class="p-2 mb-2 bold">Task Metrics</h4>
+                            <div class="d-flex justify-content-around">
+                                
+                                <div id="average-task-completed-container" class="metric-sub-section curved-borders col-7 p-3">
+                                    <div class="metric-inner-sub-section curved-borders h-100 p-2 pt-3 pb-4 d-flex flex-column justify-content-between">
+                                        <h4>You Completed</h4>
+                                        <h5>
+                                            <span id="task-variance">0.4</span><br>
+                                            <span class="red-text">Less</span> 
+                                            tasks than the<br>average employee.
+                                        </h5>
+
+                                        <div class="task-scale">
+                                            <div class="scale-bar">
+                                                <div class="segment scale-red"></div>
+                                                <div class="segment scale-orange"></div>
+                                                <div class="segment scale-yellow"></div>
+                                                <div class="segment scale-light-green"></div>
+                                                <div class="segment scale-green"></div>
+                                                <div id="task-scale-needle" style="left: 43.3333%;"></div>
+                                            </div>
+
+                                            <div class="scale-labels">
+                                                <span class="scale-extreme">3</span>
+                                                <span class="scale-mid">2</span>
+                                                <span class="scale-low">1</span>
+                                                <span>0</span>
+                                                <span class="scale-low">1</span>
+                                                <span class="scale-mid">2</span>
+                                                <span class="scale-extreme">3</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="h-100 col-4 metric-sub-section curved-borders p-2">
+                                    <div class="metric-inner-sub-section gauge-container">
+                                        <canvas id="manager-employee-task-gauge" class="task-gauge"></canvas>
+                                        <script>
+
+                                            new Chart(document.getElementById("employee-general-task-gauge"), {
+                                                type: "doughnut",
+                                                data: {
+                                                    datasets: [{
+                                                        data: [completed, overdue, total - (completed + overdue)],
+                                                        backgroundColor: ["#007BFF", "#C82333", "#d9d9d9"],
+                                                        borderWidth: 0
+                                                    }]
+                                                },
+                                                options: {
+                                                    responsive: true,
+                                                    aspectRatio: 1,
+                                                    cutoutPercentage: 88,
+                                                    circumference: 1.3 * Math.PI,
+                                                    rotation: 0.85 * Math.PI,
+                                                    legend: { display: false },
+                                                    tooltips: { enabled: false },
+                                                    layout: {
+                                                        padding:0
+                                                    }
+                                                }
+                                            });
+                                        </script>
+                                        <div class="gauge-text-overlay">
+                                            <h1 id="user-task-count" class="mt-3">
+                                                <span id="users-completed-task-count">9</span>/<span id="users-total-task-count">12</span>
+                                            </h1>
+                                            <h2 id="tasks-completed">Tasks<br>Completed</h2>
+                                        </div>
+                                        
+                                    </div>
+                                    <h4 class="red-pop-out-text">Expected Tasks: <span id="user-expected-task-count">10</span></h4>
+                                    
+                                </div>
+
+                                
+
+                            </div>
+
+                            <div class="warning-message curved-borders d-flex justify-content-center align-items-center flex-wrap p-3 m-3 text-center">
+                                
+                                <div class="d-flex align-items-center justify-content-center mb-2">
+                                    <img src="static/warning.png" alt="!" class="img-fluid me-3" style="width: 35px;">
+                                    <h5 id="training" class="mb-1 text-nowrap">Training Recommended!</h5>
+                                </div>
+                                
+                                <div class="d-flex flex-column gap-2">
+                                    <button class="btn btn-outline-danger text-nowrap notify-buttons">
+                                        Notify Employee
+                                    </button>
+                                    <button class="btn btn-danger text-nowrap notify-buttons">
+                                        Notify Employee's Team Leader
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <!-- Metrics bottom row: Overdue Tasks -->
+                    <div id="overdue-tasks" class="p-3">
+                        <div class="metric-sub-section metric-sub-section-title p-2">
+                            <h4>Overdue Tasks (<span id="user-overdue-tasks">1</span>)</h4>
+                        </div>
+                        <div class="metric-sub-section p-3 gap-2 d-flex flex-column">
+                            <div id="overdue-tasks-container" class="metric-sub-section custom-scrollbar px-3 py-1 gap-2 d-flex flex-column">
+
+                                <!-- Tasks -->    
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </section>
+            </section> 
+
+            <!-- Dashboard: Personal Tasks -->
+            <section id="personal-tasts" class="titled panel mx-auto">
+                <h5 class="panel-title p-3">
+                    Persoanl Tasks
+                </h5>
+
+                <!-- Create new task -->
+                <section id="create-task" class="text-center bg-secondary-orange">
+                    <button id="btn-add-task" class="btn btn-primary text-nowrap m-3" data-bs-toggle="modal" data-bs-target="#create-task-modal">+ Add Task</button>
+
+                    <!-- Task Creation Modal -->
+                    <div class="modal fade" id="create-task-modal" tabindex="-1" aria-labelledby="create-task-title" style="" aria-modal="true" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered ">
+                        <div class="modal-content shadow" style="">
+                        
+                        <!-- Modal Header-->
+                        <div class="modal-header">
+                            <h1 id="create-task-title" class="modal-title fs-5">Create Task</h1>
+
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <!-- Create Task Inputs -->
+                        <div class="modal-body d-flex flex-column gap-2" style="padding-bottom: 0;">
+                            <div id="top-row" class="gap-2">
+                                <input type="text" class="input-box" placeholder="Task Title...">
+
+                                <select name="user" id="user">
+                                    <option selected="" disabled="">Select User</option>
+                                    <option value="userid">Username</option>
+                                    <option value="project">Username2</option>
+                                    <option value="qa">Username3</option>
+                                    <option value="notices">Username4</option>
+                                </select>
+
+                                <select name="priority" id="priority" style="width: 130px;">
+                                    <option selected="" disabled="">Task Prirority</option>
+                                    <option value="1">Low Priority</option>
+                                    <option value="2">Medium Priority</option>
+                                    <option value="3">High Priority</option>
+                                </select>
+                            </div>
+
+                            <textarea placeholder="Task Description..." style="height: 103px;"></textarea>
+
+                            <div id="bottom-row" class="d-flex flex-row align-items-center justify-content-end">
+                                <label for="deadline" class="form-label me-2 mb-0">Deadline:</label>
+                                <input type="date" class="form-control" id="deadline" name="deadline" style="width: 180px;">
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary shadow-sm">Create Task</button>
+                            <button type="button" class="btn btn-danger shadow-sm" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- All of a user's personal tasks -->
+                <section id="task-container" class="d-flex flex-column justify-content-center p-3">
+
+                    <!-- Task 1 -->
+                    <div id="task-[id]" class="task card w-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3 id="task-title" class="card-title m-0">Task Title</h3>
+                            
+                            <div class="d-flex">
+                                <span id="task-priority" class="badge m-2 text-bg-info">Low Priority</span>
+                                <button id="delete-task" class="btn btn-danger"><strong>Delete</strong></button>
+                            </div>
+                        </div>
+
+                        <div id="task-description" class="card-body">
+                            Task Description - Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+                        </div>
+
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <!-- Leave element but clear inner html. this will ensure deadline still gets pushed to the end. -->
+                            <span id="asignee">Assigned to: <strong>User ID</strong></span>
+                            <div class="d-flex align-items-center">
+                                <span id="deadline">Deadline: <strong>27/01/2026</strong></span>
+                                <button id="status" class="btn btn-primary p-2 m-2 not-complete-btn contrast-text">Not Completed</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- Task 2 -->
+                     <div id="task-[id]" class="task card w-100">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h3 id="task-title" class="card-title m-0">Task Title</h3>
+                            
+                            <div class="d-flex">
+                                <span id="task-priority" class="badge m-2 text-bg-warning">Medium Priority</span>
+                                <button id="delete-task" class="btn btn-danger"><strong>Delete</strong></button>
+                            </div>
+                        </div>
+
+                        <div id="task-description" class="card-body">
+                            Task Description - Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+                        </div>
+
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <!-- Leave element but clear inner html. this will ensure deadline still gets pushed to the end. -->
+                            <span id="asignee">Assigned to: <strong>User ID</strong></span>
+                            <div class="d-flex align-items-center">
+                                <span id="deadline">Deadline: <strong>25/01/2026</strong></span>
+                                <button id="status" class="btn btn-primary p-2 m-2 overdue-btn contrast-text">Overdue!</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Search: Search Generic (Will be made into seperate project/knowledge when pages made however this is down tro changing text fields.)-->
+            <section id="search" class="panel mx-auto">
+
+                <!-- Search Parameters -->
+                <div id="search-bar" class="d-flex gap-3 p-3">
+                    <input id="search-text" class="input-box" style="width: 375px;" type="text" placeholder="Search..">
+
+                    <button id="btn-add-project" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-project-modal">+ Create Project</button>
+                    <button id="btn-add-knowledge" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-knowledge-modal">+ Create Knowledge</button>
+                </div>
+                <div id="filters" class="d-flex flex-wrap gap-2 p-3" style="padding-top: 0 !important;">
+                    <span class="badge badge-toggle bg-technical">Technical</span>
+                    <span class="badge badge-toggle bg-non-technical">Non-Technical</span>
+                    <span class="badge badge-toggle bg-qa">Q/A</span>
+                    <span class="badge badge-toggle bg-management">Management</span>
+                    <span class="badge badge-toggle bg-notices">Notices</span>
+                    <span class="badge badge-toggle bg-project">Project</span>
+                </div>
+                
+                <!-- Search Results Container-->
+                <div id="search-results" class="d-flex flex-wrap results-container gap-3">
+                    <div id="project-id" class="card">
+                        <div class="card-body">
+                            <h5 id="project-title" class="card-title">Quarterly Financial Analysis</h5>
+                            
+                            <p id="project-description">Analyze financial data and generate Q4 insights for executive reporting.</p>
+                            
+                        </div>
+                        <div class="card-footer">
+                            <a id="project-link" href="display.php?pageType=project&amp;pageID=2" class="btn btn-primary">View Project</a>
+                        </div>
+                    </div>
+                    <div id="knowledge-id" class="card">
+                        <div class="card-body">
+                            <h5 id="knowledge-title" class="card-title">Cybersecurity Best Practices</h5>
+                            
+                            <div id="tag-container" class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-technical">Technical</span>
+                                <span class="badge bg-technical">Technical</span>
+                            </div>
+                            
+                        </div>
+                        <div class="card-footer">
+                            <a id="knowledge-link" href="display.php?pageType=project&amp;pageID=2" class="btn btn-primary">View Topic</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Create: Create Knowledge/Topic/Post -->
+            <section id="create-knowledge">
+                <!-- Knowledge Creation Modal -->
+                <div class="modal fade" id="create-knowledge-modal" tabindex="-1" aria-labelledby="create-knowledge-title" style="" aria-modal="true" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content shadow" style="">
+                    
+                    <!-- Modal Header-->
+                    <div class="modal-header">
+                        <h1 id="create-knowledge-title" class="modal-title fs-5">Create Knowledge Topic</h1>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Create Task Inputs -->
+                    <div class="modal-body d-flex flex-column gap-2" style="padding-bottom: 0;">
+                        
+                        <!-- Knowledge Title -->
+                        <input type="text" class="input-box w-100" placeholder="Post Title...">
+
+                        <div id="top-row" class="d-flex justify-content-center gap-2">
+                            <!-- Select Teams -->
+                            <section class="btn-group" style="width: 225px;">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" style="background-color: white; border-color: gray;">
+                                    Modify Access
+                                </button>
+                                <div class="dropdown-menu p-3 curved-borders" aria-labelledby="dropdownMenuButton1">
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="team1" class="form-check-input" type="checkbox" value="" id="team1-checkbox">
+                                        <label class="form-check-label" for="team1-checkbox">
+                                            Team 1
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="team2" class="form-check-input" type="checkbox" value="" id="team2-checkbox">
+                                        <label class="form-check-label" for="team2-checkbox">
+                                            Team 2
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="team3" class="form-check-input" type="checkbox" value="" id="team3-checkbox">
+                                        <label class="form-check-label" for="team3-checkbox">
+                                            Team 3
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="team4" class="form-check-input" type="checkbox" value="" id="team4-checkbox">
+                                        <label class="form-check-label" for="team4-checkbox">
+                                            Team 4
+                                        </label>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Select Tags -->
+                            <section class="btn-group" style="width: 225px;">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" style="background-color: white; border-color: gray;">
+                                    Select Tags
+                                </button>
+                                <div class="dropdown-menu p-3 curved-borders" aria-labelledby="dropdownMenuButton1">
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="non-technical" class="form-check-input" type="checkbox" value="" id="non-technical-checkbox">
+                                        <label class="form-check-label" for="non-technical-checkbox">
+                                            Non-Technical
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="Technical" class="form-check-input" type="checkbox" value="" id="technical-checkbox">
+                                        <label class="form-check-label" for="technical-checkbox">
+                                            Technical
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="option3" class="form-check-input" type="checkbox" value="" id="option3-checkbox">
+                                        <label class="form-check-label" for="option3-checkbox">
+                                            Option 3
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="option4" class="form-check-input" type="checkbox" value="" id="option4-checkbox">
+                                        <label class="form-check-label" for="option4-checkbox">
+                                            Option 4
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="option5" class="form-check-input" type="checkbox" value="" id="option5-checkbox">
+                                        <label class="form-check-label" for="option5-checkbox">
+                                            Option 5
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="option6" class="form-check-input" type="checkbox" value="" id="option6-checkbox">
+                                        <label class="form-check-label" for="option6-checkbox">
+                                            Option 6
+                                        </label>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary shadow-sm">Publish Knowledge Topic</button>
+                        <button type="button" class="btn btn-danger shadow-sm" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Knowledge Post Modal -->
+                <div class="modal fade" id="create-post-modal" tabindex="-1" aria-labelledby="create-post-title" style="" aria-modal="true" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content shadow" style="">
+                    
+                    <!-- Modal Header-->
+                    <div class="modal-header">
+                        <h1 id="create-post-title" class="modal-title fs-5">Create Post</h1>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Create post Inputs -->
+                    <div class="modal-body d-flex flex-column gap-2" style="padding-bottom: 0;">
+                        <div id="top-row" class="gap-2">
+                            <input type="text" class="input-box w-100" placeholder="Post Title...">
+                        </div>
+
+                        <textarea placeholder="Enter Text..." style="height: 103px;"></textarea>
+
+                        <input type="file">
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary shadow-sm">Publish Post</button>
+                        <button type="button" class="btn btn-danger shadow-sm" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Create: Create Project -->
+            <section id="create-project">
+                <!-- Knowledge Creation Modal -->
+                <div class="modal fade" id="create-project-modal" tabindex="-1" aria-labelledby="create-project-title" style="" aria-modal="true" role="dialog">
+                    <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content shadow" style="">
+                    
+                    <!-- Modal Header-->
+                    <div class="modal-header">
+                        <h1 id="create-project-title" class="modal-title fs-5">Create Project</h1>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <!-- Create Task Inputs -->
+                    <div class="modal-body d-flex flex-column gap-2" style="padding-bottom: 0;">
+                        <div id="top-row" class="d-flex align-items-center gap-2">
+                            <input type="text" class="input-box" placeholder="Project Title...">
+
+                            <!-- Select Employees -->
+                            <section class="btn-group me-1" style="width: 160px;">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" style="background-color: white; border-color: gray;">
+                                   Select Team
+                                </button>
+                                <div class="dropdown-menu p-3 scroll curved-borders" aria-labelledby="dropdownMenuButton1">
+
+                                    <div class="w-100 form-check-label text-center">
+                                        <span class="badge bg-manager ms-3" >Managers</span>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="employee1" class="form-check-input" type="checkbox" value="" id="employee1-checkbox">
+                                        <label class="form-check-label" for="employee1-checkbox">
+                                            Manager 1
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+                                    <br>
+
+                                    <div class="w-100 form-check-label text-center">
+                                        <span class="badge bg-team-leader ms-3" >Team Leaders</span>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="employee2" class="form-check-input" type="checkbox" value="" id="employee2-checkbox">
+                                        <label class="form-check-label" for="employee2-checkbox">
+                                            Team Leader 1
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+                                    <br>
+
+                                    <div class="w-100 form-check-label text-center">
+                                        <span class="badge bg-worker ms-3" >Employees</span>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="employee3" class="form-check-input" type="checkbox" value="" id="employee3-checkbox">
+                                        <label class="form-check-label" for="employee3-checkbox">
+                                            Employee 1
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="employee4" class="form-check-input" type="checkbox" value="" id="employee4-checkbox">
+                                        <label class="form-check-label" for="employee4-checkbox">
+                                            Employee 2
+                                        </label>
+                                    </div>
+                                    
+                                </div>
+                            </section>
+
+                            <!-- Select Tags -->
+                            <section class="btn-group" style="width: 125px;">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false" style="background-color: white; border-color: gray;">
+                                    Select Tags
+                                </button>
+                                <div class="dropdown-menu p-3 curved-borders" aria-labelledby="dropdownMenuButton1">
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="technical" class="form-check-input" type="checkbox" value="" id="technical-checkbox">
+                                        <label class="form-check-label" for="technical-checkbox">
+                                            Technical
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="non-technical" class="form-check-input" type="checkbox" value="" id="non-technical-checkbox">
+                                        <label class="form-check-label" for="non-technical-checkbox">
+                                            Non-Technical
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="qa" class="form-check-input" type="checkbox" value="" id="qa-checkbox">
+                                        <label class="form-check-label" for="qa-checkbox">
+                                            Q/A
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="management" class="form-check-input" type="checkbox" value="" id="management-checkbox">
+                                        <label class="form-check-label" for="management-checkbox">
+                                            Management
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="notices" class="form-check-input" type="checkbox" value="" id="notices-checkbox">
+                                        <label class="form-check-label" for="notices-checkbox">
+                                            Notices
+                                        </label>
+                                    </div>
+
+                                    <hr class="dropdown-divider">
+
+                                    <div class="form-check d-flex align-items-center gap-2">
+                                        <input name="project" class="form-check-input" type="checkbox" value="" id="project-checkbox">
+                                        <label class="form-check-label" for="project-checkbox">
+                                            Project
+                                        </label>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <textarea placeholder="Enter Description..." style="height: 103px;"></textarea>
+
+                        <div id="bottom-row" class="d-flex flex-row align-items-center justify-content-end">
+                            <label for="deadline" class="form-label me-2 mb-0">Deadline:</label>
+                            <input type="date" class="form-control" id="deadline" name="deadline" style="width: 180px;">
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary shadow-sm">Create Project</button>
+                        <button type="button" class="btn btn-danger shadow-sm" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Knowledge/Topic -->
+            <section id="view-knowledge" class="panel mx-auto p-3">
+                <!-- Knowledge Title -->
+                <h1 id="knowledge-title" class="p-3 text-center bold-weight">
+                    Web Development Trends
+                </h1>
+
+                <!-- Knowledge Tags -->
+                <div class="w-100 d-flex justify-content-center">
+                    <div id="knowledge-tags" class="w-50 d-flex flex-wrap justify-content-center gap-2 px-3">
+                        <span class="badge bg-non-technical">Non-Technical</span>
+                        <span class="badge bg-non-technical">Non-Technical</span>
+                        <span class="badge bg-non-technical">Non-Technical</span>
+                    </div>
+                </div>
+
+                <!-- Knowledge Members -->
+                <div id="knowledge-members-container" class="p-3">
+                    <h6 class="bold-weight">Knowledge/Topic Members: </h6>
+
+                    <div id="users-containers" class="d-flex flex-wrap m-2 gap-2">
+                        <span class="content-box p-2 px-4 m-0 gap-2">User 1 <span class="badge bg-non-technical ms-3" >Team Leader</span></span>
+                        <span class="content-box p-2 px-4 m-0 gap-2">User 2</span>
+                    </div>
+                </div>
+
+                <!-- Posts List -->
+                <section id="posts-container">
+                    <!-- Create Post -->
+                    <div class="nav-search p-2 px-4">
+                        <button id="create-post" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create-post-modal">
+                            + Create Post
+                        </button>
+                    </div>
+
+                    <!-- Posts -->
+                    <div id="knowledge-posts-container" class="d-flex flex-wrap results-container gap-3">
+                        
+                        <!-- Example Post Card-->
+                        <div id="project-id" class="card">
+                            <div class="card-body">
+                                <h5 id="post-title" class="card-title">Web Dev</h5>
+                                
+                                <p id="post-description">This post explores the latest tools and frameworks shaping web development in 2025...</p>
+                                
+                            </div>
+                            <div class="card-footer">
+                                <a id="project-link" href="display.php?pageType=project&amp;pageID=2" class="btn btn-primary">View Post</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- View: Post -->
+            <section id="view-post" class="panel mx-auto p-3">
+                <button class="btn btn-primary mb-2" data-bs-toggle="modal"> < Return to Topic</button>
+                <div id="post-id" class="card w-100 d-flex flex-column gap-2 m-0 mb-3">
+                    <div class="d-flex align-items-center card-header px-3">
+                        <p id="post-author" class="mb-0 me-3">Alice</p>
+                        <span class="badge bg-non-technical">Manager</span>
+                        <div class="vr mx-2"></div>
+                        <p id="creation-date" class="mb-0 me-3">01/01/26</p>
+                        <div class="flex-fill"></div>
+                        <button id="delete-post" class="btn btn-danger"><strong>Delete</strong></button>
+                    </div>
+                    <div class="p-3 pt-0">
+                        <h1 id="post-title" class="bold-weight pb-2">Web dev</h1>
+
+                        <p id="post-text" class="mb-0" style="min-height: max-content;">This post explores the latest tools and frameworks shaping web development in 2025.</p>
+
+                    </div>
+                    <div class="card-footer pb-3 d-flex align-items-center  ">
+                        <a id="post-file" class="link" href="">Attached File: 101</a>
+                    </div>
+                </div>
+                
+                <!-- Create Reply Button -->
+                <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#create-post-modal">Reply +</button>
+
+                <!-- Responses container -->
+                <div id="responses" class="d-flex flex-column results-container curved-borders p-4 gap-3" style="min-height: 200px;">
+
+                    <!-- Example Response 1-->
+                    <div id="post-id" class="card w-100 d-flex flex-column gap-2 m-0 mb-3">
+                        <div class="d-flex align-items-center card-header px-3">
+                            <p id="post-author" class="mb-0 me-3">Alice</p>
+                            <span class="badge bg-non-technical">Manager</span>
+                            <div class="vr mx-2"></div>
+                            <p id="creation-date" class="mb-0 me-3">01/01/26</p>
+                            <div class="flex-fill"></div>
+                            <button id="delete-post" class="btn btn-danger"><strong>Delete</strong></button>
+                        </div>
+                        <div class="p-3 pt-0">
+                            <h1 id="post-title" class="bold-weight pb-2">Web dev</h1>
+
+                            <p id="post-text" class="mb-0" style="min-height: max-content;">This post explores the latest tools and frameworks shaping web development in 2025.</p>
+
+                        </div>
+                        <div class="card-footer pb-3 d-flex align-items-center  ">
+                            <a id="post-file" class="link" href="">Attached File: 101</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Project -->
+            <section id="view-project" class="panel secondary mx-auto p-3">
+
+                <!-- Project Info: Title, Description, Completion status & Tags-->
+                <div id="project-info" class="p-3 bg-white curved-borders">
+                    <!-- Title & Deadline-->
+                    <div id="project-title-row" class="d-flex justify-content-between">
+                        <h1 id="project-title" class="text-nowrap"><strong>Project Title</strong></h1>
+                        <!-- Project tags -->
+                         <div class="d-flex flex-wrap gap-2 mx-3 align-items-center flex-fill">
+                            <span class="badge bg-non-technical">Non-Technical</span>
+                            <span class="badge bg-non-technical">Technical</span>
+                            <span class="badge bg-non-technical">Non-Tech</span>
+                        </div>
+                        <h5 class="text-end text-nowrap">Created on: <strong><span id="project-creation-date">01/01/2026</span></strong><span class="text-wrap"></span> - By <strong><span id="project-creator">Mike</span></strong></h5>
+                    </div>
+                    <p id="project-description">Full redesign of the company’s marketing website with improved UX and mobile optimization.</p>
+
+                    <div id="project-completion-tags-container" class="d-flex justify-content-between">
+                        <!-- Project Completion bar-->
+                        <div id="completion-status-bar" class="w-100">
+                            <h5>Completion Status:</h5>
+
+                            <span id="totalTasks" class="hidden">2</span>
+                            <div id="progress-bar" class="progress m-1" role="progressbar" aria-valuenow="50">
+                                <div id="project-progress" class="progress-bar" style="width: 50%; background-color: var(--not-complete);">50%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="text-center mt-3">Deadline: <strong><span id="project-deadline">01/01/2026</span> </strong></h5>
+                </div>
+
+                <!-- Project Members-->
+                <section id="project-members" class="titled panel">
+                    <h5 class="panel-title p-3" style="font-weight: 800;">
+                        Project Members
+                    </h5>
+
+                    <!-- Project Memebers-->
+                    <div id="users-containers" class="d-flex flex-wrap p-3 gap-2">
+                        <h4 class="fw-bold w-100 m-0">Overseeing Team (<span id="uppers">1</span>)</h4>
+
+                        <div id="overseering-members" class="secondary panel p-3 d-flex flex-wrap scroll" style="max-height: 12rem;">
+                            <span class="content-box p-2 px-4 m-1">User 1 <span class="badge bg-non-technical ms-3">Team Leader</span> </span>
+                        </div>
+                        <span class="seperator"></span>
+
+                        
+                        <h4 class="fw-bold w-100">Project Team (<span id="lowers">1</span>)</h4>
+
+                        <div id="team-members" class="secondary panel p-3 d-flex flex-wrap scroll" style="max-height: 12rem;">
+                            <span class="content-box p-2 px-4 m-1">User 2</span>
+                        </div>
+                        
+                    </div>
+                </section>
+
+                
+
+                <!-- Project Tasks -->
+                <section id="project-tasks" class="titled panel">
+                    
+                    <h5 class="panel-title p-3" style="font-weight: 800;">
+                        Project Tasks
+                    </h5>
+
+                    <div></div>
+
+                    
+                    <!-- Hide for regular employee -->
+                    <div id="task-header" class="p-3 pb-0">
+                        <button id="add-task" class="btn btn-primary"><strong>+ Add Task</strong></button>
+                    </div>
+
+                    <!-- Task Container-->
+                    <div id="task-container" class="p-3 scroll">
+
+                        <!-- Task 1 -->
+                        <div id="task-[id]" class="task card w-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h3 id="task-title" class="card-title m-0">Task Title</h3>
+                                
+                                <div class="d-flex">
+                                    <span id="task-priority" class="badge m-2 text-bg-info">Low Priority</span>
+                                    <button id="delete-task" class="btn btn-danger"><strong>Delete</strong></button>
+                                </div>
+                            </div>
+
+                            <div id="task-description" class="card-body">
+                                Task Description - Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+                            </div>
+
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <!-- Leave element but clear inner html. this will ensure deadline still gets pushed to the end. -->
+                                <div class="text-nowrap">Assigned to: <strong><span id="asignee">User ID</span></strong>ㅤ <span class="text-wrap"></span>On: <strong><span id="date-assigned">01/01/26</span></strong></div>
+                                <div class="d-flex align-items-center">
+                                    <span id="deadline">Deadline: <strong>27/01/2026</strong></span>
+                                    <button id="status" class="btn btn-primary p-2 m-2 not-complete-btn contrast-text">Not Completed</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <!-- Task 2 -->
+                        <div id="task-[id]" class="task card w-100">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h3 id="task-title" class="card-title m-0">Task Title</h3>
+                                
+                                <div class="d-flex">
+                                    <span id="task-priority" class="badge m-2 text-bg-info">Low Priority</span>
+                                    <button id="delete-task" class="btn btn-danger"><strong>Delete</strong></button>
+                                </div>
+                            </div>
+
+                            <div id="task-description" class="card-body">
+                                Task Description - Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+                            </div>
+
+                            <div class="card-footer d-flex justify-content-between align-items-center">
+                                <!-- Leave element but clear inner html. this will ensure deadline still gets pushed to the end. -->
+                                <div class="text-nowrap">Assigned to: <strong><span id="asignee">User ID</span></strong>ㅤ On: <strong><span id="date-assigned">01/01/26</span></strong></div>
+                                <div class="d-flex align-items-center">
+                                    <span id="deadline">Deadline: <strong>27/01/2026</strong></span>
+                                    <button id="status" class="btn btn-primary p-2 m-2 not-complete-btn contrast-text">Not Completed</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                </section>
+            </section>
+
+            <!-- TODO: Management: Notifications & User/Team Management -->
+            <section id="management" class="panel mx-auto p-4">
+
+                <section id="notifications-section d-flex">
+                    
+                    <div id="notification-titles" class="d-flex gap-2">
+                        <h5 class="panel-title p-3  m-0 position-static" style="font-weight: 800;">
+                            Notifications
+                        </h5>
+                        <h5 id="total-notifications" class="panel-title p-3 m-0 position-static" style="font-weight: 800; color: white; background-color: var(--complete) !important;">
+                            You have no notifications
+                        </h5>
+                    </div>
+
+                    <div id="view-notifications" class="titled secondary panel m-0 w-100">
+                        <div id="notifications-containers" class="p-3 scroll">
+                            
+                            <!-- Notification 1 -->
+                            <div id="notification-[id]" class="task card w-100">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h3 id="task-title" class="card-title m-0">Notification Title</h3>
+                                    <button id="delete-notification" class="btn btn-danger"><strong>Delete</strong></button>
+                                </div>
+
+                                <div id="notification-description" class="card-body">
+                                    Notification Description - Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+                                </div>
+
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="text-nowrap">Sent By: <strong><span id="sender">User ID</span></strong>ㅤ On: <strong><span id="send-date">01/01/26</span></strong></div>
+                                </div>
+                            </div>
+
+                            <!-- Notification 2 -->
+                            <div id="notification-[id]" class="task card w-100">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h3 id="task-title" class="card-title m-0">Notification Title</h3>
+                                    <button id="delete-notification" class="btn btn-danger"><strong>Delete</strong></button>
+                                </div>
+
+                                <div id="notification-description" class="card-body">
+                                    Notification Description - Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
+                                </div>
+
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <div class="text-nowrap">Sent By: <strong><span id="sender">User ID</span></strong>ㅤ On: <strong><span id="send-date">01/01/26</span></strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="d-flex justify-content-between ">
+
+                    <!-- Team Management -->
+                    <section id="team-management" class="titled secondary panel" style="width: 60%;">
+                        
+                        <h5 class="panel-title p-3 m-0" style="font-weight: 800;">
+                            Team Management
+                        </h5>
+                        
+                        <div id="teams-container" class="p-3 scroll d-flex flex-wrap gap-3">
+                            
+                            <!-- Team 1 -->
+                            <div id="team-[id]" class="task card" style="width: 48%">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h3 id="team-name" class="card-title m-0">Team Name</h3>
+                                </div>
+
+                                <div id="team-leader" class="card-body">
+                                    Team Leader: <strong>User ID</strong>
+                                </div>
+
+                                <div class="card-footer d-flex justify-content-between align-items-center">
+                                    <span id="team-count">Members: <strong>67</strong></span>
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex">
+                                            <button id="btn-edit-team" class="btn btn-primary text-nowrap m-3" data-bs-toggle="modal" data-bs-target="#setup-team-modal">Edit Team</button>
+
+                                            <!-- Team Setup Modal -->
+                                            <div class="modal fade" id="setup-team-modal" tabindex="-1" aria-labelledby="setup-team-title" aria-modal="true" role="dialog">
+                                                <div class="modal-dialog modal-dialog-centered" style="max-width: 60%;">
+                                                    <div class="modal-content shadow">
+                                                    
+                                                        <!-- Modal Header-->
+                                                        <div class="modal-header d-flex align-items-center gap-3">
+                                                            <h1 id="setup-team-title" class="modal-title fs-5">Setup Team</h1>
+
+                                                            <div class="ms-auto d-flex align-items-center gap-2">
+                                                                <button type="button" class="btn btn-primary shadow-sm">Add Leaders</button>
+                                                                <button type="button" class="btn btn-primary shadow-sm" data-bs-toggle="modal" data-bs-target="#member-select-modal">Add Members</button>
+                                                                <button type="button" class="btn-close" aria-label="Close"></button>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Team Setup Inputs -->
+                                                        <div class="modal-body d-flex flex-column gap-2" style="padding-bottom: 0;">
+                                                            <div id="top-row" class="d-flex gap-2 align-items-center">
+                                                                <h6 class="m-0">Team Name:</h6>
+                                                                <input type="text" class="input-box" placeholder="Team Name...">
+
+                                                                <h6 class="m-0">Leaders:</h6>
+                                                                <!-- Leaders Container -->
+                                                                <div id="leaders-container" class="panel scroll p-3 d-flex flex-wrap gap-3 m-0" style="width: 55%;">
+                                                                    <!-- Leader 1 -->
+                                                                    <div id="leader-[id]" class="p-2 bg-white d-flex justify-content-between align-items-center" style="border-radius: 100px; width: 30%;">
+                                                                        <strong>Leader</strong>
+                                                                        <button id="remove-leader" class="btn btn-danger btn-sm" style="border-radius: 100px;">&#10005;</button>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+
+                                                            <h6 class="m-0">Members:</h6>
+
+                                                            <div id="bottom-row" class="d-flex flex-row align-items-center justify-content-center">
+                                                                
+                                                                <!-- Members Container -->
+                                                                <div id="members-container" class="panel scroll p-3 d-flex flex-wrap gap-3 m-0">
+                                                                    <!-- Member 1 -->
+                                                                    <div id="member-[id]" class="p-2 bg-white d-flex justify-content-between align-items-center" style="border-radius: 100px; width: 18%;">
+                                                                        <strong>Member</strong>
+                                                                        <button id="remove-member" class="btn btn-danger btn-sm" style="border-radius: 100px;">&#10005;</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Footer -->
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary shadow-sm">Confirm Details</button>
+                                                            <button type="button" class="btn btn-danger shadow-sm" data-bs-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Member Select Modal -->
+                                            <div class="modal fade" id="member-select-modal" tabindex="-1" aria-labelledby="member-select-title" aria-modal="true" role="dialog">
+                                                <div class="modal-dialog modal-dialog-centered" style="max-width: 60%;">
+                                                    <div class="modal-content shadow">
+                                                    
+                                                        <!-- Modal Header-->
+                                                        <div class="modal-header d-flex align-items-center gap-3">
+                                                            <h1 id="member-select-title" class="modal-title fs-5">Select Members</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+
+                                                        <!-- Member Select Inputs -->
+                                                        <div class="modal-body d-flex flex-column gap-2" style="padding-bottom: 0;">
+                                                            <div id="top-row" class="d-flex gap-2 align-items-center">
+                                                                <input id="search-member" class="input-box" style="width: 60%;" type="text" placeholder="Search Member..">
+                                                            </div>
+
+                                                            <div id="bottom-row" class="d-flex flex-column align-items-center justify-content-center">
+
+                                                                <!-- Members Selected Container -->
+                                                                <div id="members-select-container" class="panel scroll p-3 d-flex flex-wrap gap-3 m-0" style="border-radius: var(--bdr-rad) var(--bdr-rad) 0 0;">
+                                                                    <!-- Member 1 -->
+                                                                    <div id="member-[id]" class="p-2 bg-white d-flex justify-content-between align-items-center" style="border-radius: 100px; width: 18%;">
+                                                                        <strong>Member</strong>
+                                                                        <button id="remove-member" class="btn btn-danger btn-sm" style="border-radius: 100px;">&#10005;</button>
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- Member Results Container -->
+                                                                <div id="members-results-container" class="primary panel scroll p-3 d-flex flex-wrap gap-3 m-0" style="border-radius: 0 0 var(--bdr-rad) var(--bdr-rad);">
+                                                                    <!-- Member 1 -->
+                                                                    <div id="member-[id]" class="p-2 bg-white d-flex justify-content-between align-items-center" style="border-radius: 100px; width: 18%;">
+                                                                        <strong>Member</strong>
+                                                                        <button id="select-member" class="btn btn-success btn-sm" style="border-radius: 100px;">&#x2b;</button>
+                                                                    </div>
+                                                                    <!-- Member 2 -->
+                                                                    <div id="member-[id]" class="p-2 bg-white d-flex justify-content-between align-items-center" style="border-radius: 100px; width: 18%;">
+                                                                        <strong>Member</strong>
+                                                                        <button id="select-member" class="btn btn-success btn-sm" style="border-radius: 100px;">&#x2b;</button>
+                                                                    </div>
+                                                                    <!-- Member 3 -->
+                                                                    <div id="member-[id]" class="p-2 bg-white d-flex justify-content-between align-items-center" style="border-radius: 100px; width: 18%;">
+                                                                        <strong>Member</strong>
+                                                                        <button id="select-member" class="btn btn-success btn-sm" style="border-radius: 100px;">&#x2b;</button>
+                                                                    </div>
+                                                                    <!-- Member 4 -->
+                                                                    <div id="member-[id]" class="p-2 bg-white d-flex justify-content-between align-items-center" style="border-radius: 100px; width: 18%;">
+                                                                        <strong>Member</strong>
+                                                                        <button id="select-member" class="btn btn-success btn-sm" style="border-radius: 100px;">&#x2b;</button>
+                                                                    </div>
+                                                                    <!-- Member 5 -->
+                                                                    <div id="member-[id]" class="p-2 bg-white d-flex justify-content-between align-items-center" style="border-radius: 100px; width: 18%;">
+                                                                        <strong>Member</strong>
+                                                                        <button id="select-member" class="btn btn-success btn-sm" style="border-radius: 100px;">&#x2b;</button>
+                                                                    </div>
+                                                                    <!-- Member 6 -->
+                                                                    <div id="member-[id]" class="p-2 bg-white d-flex justify-content-between align-items-center" style="border-radius: 100px; width: 18%;">
+                                                                        <strong>Member</strong>
+                                                                        <button id="select-member" class="btn btn-success btn-sm" style="border-radius: 100px;">&#x2b;</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Footer -->
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary shadow-sm">Confirm Details</button>
+                                                            <button type="button" class="btn btn-danger shadow-sm" data-bs-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </section>  
+
+                    <!-- Account Activation -->
+                    <section id="account-activation" class="titled secondary panel" style="width: 36%;">
+                        <h5 class="panel-title p-3 m-0" style="font-weight: 800;">
+                            Account Activation
+                        </h5>
+                        <div id="accounts-container" class="p-3 scroll">
+
+                            <!-- User 1 -->
+                            <div id="user-id" class="task card">
+                                <div class="card-body d-flex justify-content-between align-items-center curved-borders">
+                                    <span id="user-details"><strong>Username / Email</strong></span>
+                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex gap-2">
+                                        <button id="accept-btn" class="btn btn-success">Accept</button>
+                                        <button id="decline-btn" class="btn btn-danger">Decline</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- User 2 -->
+                            <div id="user-id" class="task card">
+                                <div class="card-body d-flex justify-content-between align-items-center curved-borders">
+                                    <span id="user-details"><strong>Username / Email</strong></span>
+                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex gap-2">
+                                        <button id="accept-btn" class="btn btn-success">Accept</button>
+                                        <button id="decline-btn" class="btn btn-danger">Decline</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- User 3 -->
+                            <div id="user-id" class="task card">
+                                <div class="card-body d-flex justify-content-between align-items-center curved-borders">
+                                    <span id="user-details"><strong>Username / Email</strong></span>
+                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex gap-2">
+                                        <button id="accept-btn" class="btn btn-success">Accept</button>
+                                        <button id="decline-btn" class="btn btn-danger">Decline</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- User 4 -->
+                            <div id="user-id" class="task card">
+                                <div class="card-body d-flex justify-content-between align-items-center curved-borders">
+                                    <span id="user-details"><strong>Username / Email</strong></span>
+                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex gap-2">
+                                        <button id="accept-btn" class="btn btn-success">Accept</button>
+                                        <button id="decline-btn" class="btn btn-danger">Decline</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- User 5 -->
+                            <div id="user-id" class="task card">
+                                <div class="card-body d-flex justify-content-between align-items-center curved-borders">
+                                    <span id="user-details"><strong>Username / Email</strong></span>
+                                    <div class="d-flex align-items-center">
+                                    <div class="d-flex gap-2">
+                                        <button id="accept-btn" class="btn btn-success">Accept</button>
+                                        <button id="decline-btn" class="btn btn-danger">Decline</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </section>           
+                </div>
+                         
+            </section>
+
+        <!-- Custom Dropdown Multiselect Form -->
+        <section class="btn-group">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false" style="background-color: white;">
+                Dropdown button
+            </button>
+            <div class="dropdown-menu p-3 curved-borders" aria-labelledby="dropdownMenuButton1">
+                <div class="form-check d-flex align-items-center gap-2">
+                    <input name="option1" class="form-check-input" type="checkbox" value="" id="option1-checkbox">
+                    <label class="form-check-label" for="option1-checkbox">
+                        Option 1
+                    </label>
+                </div>
+
+                <hr class="dropdown-divider">
+
+                <div class="form-check d-flex align-items-center gap-2">
+                    <input name="option2" class="form-check-input" type="checkbox" value="" id="option2-checkbox">
+                    <label class="form-check-label" for="option2-checkbox">
+                        Option 2
+                    </label>
+                </div>
+
+                <hr class="dropdown-divider">
+
+                <div class="form-check d-flex align-items-center gap-2">
+                    <input name="option3" class="form-check-input" type="checkbox" value="" id="option3-checkbox">
+                    <label class="form-check-label" for="option3-checkbox">
+                        Option 3
+                    </label>
+                </div>
+
+                <hr class="dropdown-divider">
+
+                <div class="form-check d-flex align-items-center gap-2">
+                    <input name="option4" class="form-check-input" type="checkbox" value="" id="option4-checkbox">
+                    <label class="form-check-label" for="option4-checkbox">
+                        Option 4
+                    </label>
+                </div>
+
+                <hr class="dropdown-divider">
+
+                <div class="form-check d-flex align-items-center gap-2">
+                    <input name="option5" class="form-check-input" type="checkbox" value="" id="option5-checkbox">
+                    <label class="form-check-label" for="option5-checkbox">
+                        Option 5
+                    </label>
+                </div>
+
+                <hr class="dropdown-divider">
+
+                <div class="form-check d-flex align-items-center gap-2">
+                    <input name="option6" class="form-check-input" type="checkbox" value="" id="option6-checkbox">
+                    <label class="form-check-label" for="option6-checkbox">
+                        Option 6
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        </main>
+
+        <footer class="p-3 d-flex justify-content-between align-items-center">
+
+            <section id="page-links" class="d-flex flex-column">
+                <a class="link" href="dashboard.php" rel="noopener noreferrer">Dashboard</a>
+                <a class="link" href="search.php?type=projects" rel="noopener noreferrer">Search Projects</a>
+                <a class="link" href="search.php?type=knowledge" rel="noopener noreferrer">Search Knowledge</a>
+            </section>
+
+            <section id="attributes" class="m-4">
+                <h4 class="primary-text text-end">2026 Team_17 for COB290 [Make-It-All]</h4>
+            </section>
+        </footer>
+    </body>
+
+    <script>
+        // Toggles the badges so they are selectable for the search. 
+    document.querySelectorAll('.badge-toggle').forEach(badge => {
+        badge.classList.add('disabled'); 
+
+        badge.addEventListener('click', () => {
+            const enabled = !badge.classList.contains('disabled');
+
+            if (enabled) {
+                // Disable
+                badge.classList.add('disabled');
+            } else {
+                // Enable
+                badge.classList.remove('disabled');
+            }
+        });
+
+        // Call Update Search
+    });
+    </script>
+
+</html>

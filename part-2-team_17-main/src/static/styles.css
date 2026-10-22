@@ -1,0 +1,1102 @@
+
+/* Colour Variables */
+:root {
+    --bg-colour: #FFF9EC;
+    --bg-panel: #FCF0CC;
+    --panel-title: #FFFFFF;
+    --nav-colour: #FBEAB6;
+
+    --primary-colour: #FFCF75;
+    --secondary-colour: #FFE4B2;
+    --cta-colour: #E63946;
+
+    --primary-btn: #FFCF75;
+    --primary-btn-hover: #FFD991; /* 20% lighter */
+    --secondary-btn: #FFE4B2;
+    --secondary-btn-hover: #FFD991;
+    --warning-bg-colour: #FCD8C5;
+
+    --primary-text-colour: /*#000000*/ #AD5216;
+    --secondary-text-colour: #212121;
+    --contrast-text-colour: #FFFFFF;
+
+    --unavailable-red: #FD8F87;
+    --available-green: #B1E8B2;
+    --soft-disabled-grey: #EDF2F4;
+
+    --bdr-rad: 15px;
+
+    --not-complete: #007BFF;
+    --complete: #28A745;
+    --near-deadline: #FF8C00;
+    --overdue: #C82333;
+    --not-complete-hover: #0069D9;
+    --complete-hover: #218838;
+    --near-deadline-hover: #E67E00;
+    --overdue-hover: #BD2130;
+
+    /* Tag Colours */
+    --technical: #E02828;
+    --non-technical: #3FBFE6;
+    --qa: #e6cf00;
+    --management: #008080;
+    --notices: #22c92f;
+    --project: #0003cc;
+}
+
+/*
+---------------------------
+
+    Dynamic 
+    CSS for dynamic webpages to ensure CSS content is shown correctly on every device
+
+---------------------------
+*/
+/* Small Screens (ie phones) */
+@media (max-width:500px) {
+    #nav-row-2 {
+        flex-direction: column;
+    }
+
+    #login-form {
+        width: 100% !important;
+    }
+
+    .recent-redir-holder {
+        flex-direction: column;
+    }
+    .recent-redir-holder > .card {
+        width: 100% !important;
+        margin: 1rem 0 0.5rem 0 !important;
+    }
+
+    .task > .card-footer {
+        flex-direction: column;
+    }
+
+    #top-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    #top-row > * {
+        width: 90% !important; 
+    }
+
+    #search-bar {
+        flex-direction: column;
+    }
+    #search-text {
+        width: 100% !important;
+    }
+
+    #completion-status-bar {
+        width: 100% !important;
+    }
+
+    #project-completion-tags-container {
+        flex-direction: column;
+    }
+    #completion-status-bar {
+        padding-bottom: 1rem;
+    }
+
+    #project-title-row {
+        flex-direction: column;
+    }
+    #project-title-row > h5 {
+        text-align: start !important ;
+    }
+
+    #users-projects {
+        width: 100% !important;
+    }
+    #task-metrics {
+        width: 100% !important;
+    }
+
+    #met-graph
+    {
+        display: none !important;
+    }
+    .redirect-holder
+    {
+        width: 100%;
+        max-height: none !important;
+    }
+
+    #man-general
+    {
+        padding: 0 !important;
+    }
+
+    #gauges > div > div
+    {
+        width: 100%;
+    }
+
+    #specific-employee-metrics
+    {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #specific-employee-metrics > div
+    {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    #manager-metrics
+    {
+        padding-bottom: 3rem !important;
+    }
+
+    #current-project > .panel-title
+    {
+        height: 7rem;
+        top: -7rem;
+    }
+    #current-project
+    {
+        margin-top: 7rem;
+    }
+
+    #project-metric-redirect
+    {
+        flex-direction: column;
+    }
+
+    #project-metric-overview
+    {
+        flex-direction: column !important;
+    }
+
+    #project-metric-overview > div
+    {
+        width: 100%;
+    }
+    #project-metric-overview-container
+    {
+        padding: 0 !important;
+    }
+}
+
+/* Medium Screens (ie ipads (and includes phones) */
+@media (max-width:768px) {
+    #redir-holder {
+        flex-direction: column;
+    }
+
+    #login-form {
+        width: 100% !important;
+    }
+
+    #search-results > .card, #knowledge-posts-container > .card {
+    width: 100% !important;
+    }
+
+    .hide-small
+    {
+        display: none;
+    }
+}
+
+/* 
+---------------------------
+
+    Tag
+    CSS for specific objects identified by HTML Tag
+    
+---------------------------
+*/
+body {
+    background: var(--bg-colour);
+    font-family: 'Inter', sans-serif;
+}
+
+nav {
+    padding-bottom: 0px !important;
+}
+
+a {
+    color: inherit !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease-in-out;
+}
+
+h1,h2,h3,h4,h5,p {
+    margin: 0;
+    padding: 0;
+}
+h1,h2 {
+    color: var(--primary-text-colour);
+}
+h3,h4,h5 {
+    color: var(--secondary-text-colour);
+}
+
+h1 {
+    font-size: 4rem;
+}
+h2 {
+    font-size: 3rem;
+    font-weight: 800;
+}
+h3 {
+    font-size: 1.8rem;
+}
+h4 {
+    font-size: 1.5rem;
+}
+h5 {
+    font-size: 1.25rem;
+} 
+/*h1 50px, h2 40px, h3 30px, h4 25px h5 20px */
+input[type='checkbox'] {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+input[type='radio'] {
+    width: 20px;
+    height: 20px;
+    margin: 0px;
+}
+input[type='date'] {
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid #767676;
+}
+input[type='text'] {
+    border: 1px solid var(--primary-btn);
+}
+select {
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+footer {
+    background: var(--secondary-colour);
+}
+
+/* #region Class CSS 
+---------------------------------------
+
+    Bootstrap Class
+    CSS for existing bootstrap classes that have been changed
+    or classes that extend off bootstraps concepts
+
+---------------------------------------
+*/
+
+.btn {
+    border-radius: var(--bdr-rad) !important;
+}
+
+.btn-primary {
+  
+  background-color: var(--primary-btn) !important;
+  border-color: var(--primary-btn) !important;
+  color: var(--secondary-text-colour) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-btn-hover) !important;
+  border-color: var(--primary-btn-hover) !important;
+}
+
+.btn-secondary {
+  background-color: var(--secondary-btn) !important;
+  border-color: var(--secondary-btn) !important;
+  color: var(--secondary-text-colour) !important;
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-btn-hover) !important;
+  border-color: var(--secondary-btn-hover) !important;
+}
+
+.btn-overdue {
+    border-radius: var(--bdr-rad) !important;
+    background-color: var(--overdue) !important;
+    border-color: var(--overdue) !important;
+    color: white !important;
+}
+
+.badge {
+    color: white !important;
+    height: fit-content;
+}
+
+.big-badge {
+    font-size: 1rem !important;
+}
+
+.badge-toggle {
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+.badge-toggle.disabled {
+    filter: grayscale(60%) brightness(0.8);
+    opacity: 0.8;
+}
+
+.bg-manager {
+    background-color: #008080;
+}
+
+.bg-team-leader {
+    background-color: #796DAF;
+}
+
+.bg-worker {
+    background-color: var(--primary-text-colour);
+}
+
+.bg-low {
+    background-color: #198754;
+}
+
+.bg-med {
+    background-color: #FFC107;
+}
+
+.bg-high {
+    background-color: #DC3545;
+}
+
+.bg-technical {
+    background-color: var(--technical);
+}
+
+.bg-non-technical {
+    background-color: var(--non-technical);
+}
+
+.bg-qa {
+     background-color: var(--qa);
+}
+
+.bg-management {
+    background-color: var(--management);
+}
+
+.bg-notices {
+    background-color: var(--notices);
+}
+
+.bg-project {
+    background-color: var(--project);
+}
+
+.bg-secondary-orange {
+    background-color: var(--secondary-colour);
+}
+
+.bg-white {
+    background-color: #FFFFFF;
+}
+
+.card {
+    border-radius: var(--bdr-rad) !important;
+}
+
+.card-text{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-header {
+    border-radius: var(--bdr-rad) var(--bdr-rad) 0 0 !important;
+}
+
+.card-footer {
+    border-radius: 0 0 var(--bdr-rad)var(--bdr-rad) !important;
+}  
+
+.minh-0{
+    min-height: 0;
+}
+
+.dropdown-menu{
+    max-height: 20rem;
+    overflow-y: auto;
+}
+
+/* #region Class CSS 
+---------------------------------------
+
+    Class
+    CSS for specific objects identified by Class
+
+---------------------------------------
+*/
+
+.nav-row-1
+{
+    background-color: var(--secondary-colour)
+}
+
+.nav-row-2{
+    background-color: var(--nav-colour);
+}
+
+.nav-btn {
+    /*width: 100%;*/
+    font-size: 1.25rem !important;
+    border-radius: 0px !important;
+    border-bottom-left-radius: var(--bdr-rad) !important;
+    border-bottom-right-radius: var(--bdr-rad) !important;
+}
+
+.nav-active{
+    background-color: var(--primary-btn) !important;
+}
+
+.nav-btn.nav-left{
+    border-bottom-left-radius: 0px !important;
+}
+
+.nav-btn.nav-right{
+    border-bottom-right-radius: 0px !important;
+}
+
+#btn-general:hover {
+    background-color: var(--primary-btn) !important;
+}
+
+.nav-btn:hover
+{
+    background-color: var(--primary-btn-hover) !important;
+}
+
+.nav-search {
+    background-color: var(--secondary-colour);
+}
+
+.panel {
+    width: 98%;
+    background-color: var(--bg-panel);
+    border-radius: var(--bdr-rad);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.titled{
+    border-top-left-radius: 0;
+    position: relative;
+    margin-top: 5rem; /* space for the title */
+}
+
+.titled-2 {
+    position: relative;
+    margin-top: 5.5rem; /* space for the title */
+}
+
+.seperator {
+    width: 100%;
+    height: 2px;
+    background: var(--primary-colour);
+}
+
+.panel-title {
+    position: absolute;
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    height: 3.5rem;
+    top: -3.5rem; /* padding bottom+ */
+    border-top-left-radius: var(--bdr-rad);
+    border-top-right-radius: var(--bdr-rad);
+    font-weight: 900;
+    background-color: var(--panel-title);
+}
+
+.panel-title-2 {
+    position: absolute;
+    padding: 1rem;
+    padding-bottom: 0.5rem;
+    height: 3.5rem;
+    top: -4rem; /* padding bottom+ */
+    border-radius: var(--bdr-rad);
+    font-weight: 900;
+    background-color: var(--panel-title);
+    margin-bottom:0.5rem;
+}
+
+.redirect-holder{
+    max-height: 35rem;
+}
+
+
+.main-redir {
+    width: 100%;
+    max-height: 19rem !important;
+    background-color: var(--secondary-colour) !important;
+    border-radius: var(--bdr-rad) !important;
+    z-index: 1;
+    margin-bottom: 0.5rem;
+}
+
+/* Move icon to be central and behind text. */
+.redir-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 45%;
+  max-width: 80%;
+  z-index: -1 !important;
+}
+
+.redir-text {
+    text-align: center;
+    padding: 3rem 1rem;
+    height: 10rem;
+}
+
+.task {
+    margin-bottom: 1rem;
+}
+
+.primary {
+    background-color: var(--primary-colour) !important;
+}
+
+.secondary {
+    background-color: var(--secondary-colour) !important;
+}
+
+.metrics-panel {
+    background-color: var(--secondary-colour);
+}
+
+.results-container {
+    padding: 1.2rem !important;
+    border-radius: 0 0 var(--bdr-rad) var(--bdr-rad) !important;
+    background-color: var(--primary-colour);
+}
+
+.results-container p {
+    margin: 0;
+}
+
+.results-number {
+    font-size: 4rem;
+}
+
+.project-panel {
+    width: 98%;
+    background-color: var(--secondary-colour);
+    border-radius: var(--bdr-rad);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.task-card {
+    min-width: 425px !important;
+}
+
+.perfect-task-card {
+    width: 425px !important;
+    height: 425px !important;
+}
+
+/* NOT COMPLETE */
+.not-complete-btn {
+    background-color: var(--not-complete) !important;
+    border-color: var(--not-complete) !important;
+}
+.not-complete-btn:hover {
+    background-color: var(--not-complete-hover) !important;
+    border-color: var(--not-complete-hover) !important;
+}
+
+/* COMPLETE but no hover cause time, protoype*/
+.complete-btn {
+    background-color: var(--complete) !important;
+    border-color: var(--complete) !important;
+}
+.complete-btn:hover {
+    background-color: var(--complete) !important;
+    border-color: var(--complete) !important;
+}
+
+/* NEAR DEADLINE */
+.near-deadline-btn {
+    background-color: var(--near-deadline) !important;
+    border-color: var(--near-deadline) !important;
+}
+.near-deadline-btn:hover {
+    background-color: var(--near-deadline-hover) !important;
+    border-color: var(--near-deadline-hover) !important;
+}
+
+/* OVERDUE */
+.overdue-btn {
+    background-color: var(--overdue) !important;
+    border-color: var(--overdue) !important;
+}
+.overdue-btn:hover {
+    background-color: var(--overdue-hover) !important;
+    border-color: var(--overdue-hover) !important;
+}
+
+
+.scroll {
+    max-height: 16rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.task-text {
+    background-color: #F5F5F5;
+    border-radius: var(--bdr-rad);
+}
+
+.smallBoxTitle{
+    position: relative;
+    left: 13%;
+    /*making space between the top of this box and bottom of element above*/
+    margin-top: 10px;
+    width: 200px;
+    height:auto;
+    background-color: white;
+}
+
+.container{
+    position:relative;
+    /*making space between top and bottom of this box, also centering the element horizontally*/
+    margin:10px auto;
+    width: 1062px;
+    height: 400px;
+    background-color: #FCF0CC;
+}
+
+.pTaskBox{
+    position:relative;
+    left: 50%;
+    top: 20px;
+    transform: translate(-50%, 0%);     
+    width: 1002px;
+    height: 200px;
+    background-color: white;
+}
+
+.text-drop-shadow {
+    text-shadow: 
+    0px 4px /* x,y */
+    4px /* blur radius */
+    rgba(0, 0, 0, 0.25); /* 25% black opacity*/
+}
+
+.primary-text {
+    color: var(--primary-text-colour) !important;
+}
+
+.secondary-text {
+    color: var(--secondary-text-colour) !important;
+}
+
+.contrast-text {
+    color: var(--contrast-text-colour) !important;
+}
+
+.med-weight {
+    font-weight: 500;
+}
+
+.semi-bold-weight {
+    font-weight: 600;
+}
+
+.bold-weight {
+    font-weight: 700;
+}
+
+.black-weight {
+    font-weight: 900;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+.curved-borders {
+    border-radius: var(--bdr-rad) !important;
+}
+
+.top-curved{
+    border-radius: var(--bdr-rad) var(--bdr-rad) 0 0 !important;
+}
+
+.bottom-curved{
+    border-radius: 0 0 var(--bdr-rad) var(--bdr-rad) !important;
+}
+
+
+.interactive:hover {
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.link:hover {
+    color: #0000EE !important;
+    text-decoration: underline;
+}
+
+.modal-content {
+    --bs-modal-bg: var(--secondary-colour) !important;
+    border: none !important;
+    border-radius: var(--bdr-rad) !important;
+}
+
+.modal-backdrop {
+    background-color: white !important;
+}
+
+.modal-header, .modal-body, .modal-footer {
+    border: none !important;
+}
+
+.modal-body {
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+.modal-footer {
+    justify-content: space-between !important;
+}
+
+.input-error {
+    border: 2px solid #dc3545 !important;
+}
+
+button.input-error {
+    border: 2px solid red !important;
+    box-shadow: 0 0 5px red;
+}
+
+.input-box {
+    border-radius: var(--bdr-rad) !important;
+    padding: 12px;
+    height: 40px;
+}
+
+.content-box {
+    width: fit-content;
+    height: fit-content;
+    margin: 1rem !important;
+    padding: 1.2rem !important;
+    background-color: white !important;
+    border-radius: var(--bdr-rad) !important;
+}
+
+.overflow-ellipsis {
+    white-space: nowrap;      
+    overflow: hidden;         
+    text-overflow: ellipsis;  
+}
+
+.metric-sub-section {
+    position:relative;
+    height: fit-content;
+    top:0;
+    background-color: var(--primary-btn);
+    border-radius: 0 var(--bdr-rad) var(--bdr-rad) var(--bdr-rad);
+}
+
+.metric-inner-sub-section
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: var(--secondary-colour);
+}
+
+.metric-sub-section-title {
+    border-radius: var(--bdr-rad) var(--bdr-rad) 0 0 !important;
+    width: min-content;
+    height: min-content;
+    text-wrap-mode: nowrap;
+    margin: 0 !important;
+}
+
+.custom-scrollbar{
+  overflow-y:auto;
+  overflow-x: hidden;
+  scrollbar-width: thick;
+  scrollbar-color: var(--primary-text-colour) var(--secondary-colour);
+}
+
+.gauge-container {
+    width: 100%;
+    padding: 10%;
+    padding-bottom: 10px;
+    aspect-ratio: 1.15 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0 auto;
+    border-top-left-radius: 200px;
+    border-top-right-radius: 200px;
+    border-bottom-left-radius: 110px;
+    border-bottom-right-radius: 110px;
+}
+
+.gauge-text-overlay {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.red-text{
+    color: red;
+}
+
+.more-text{
+    color: green;
+}
+
+.task-scale {
+    width: 100%;
+    max-width: 400px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.scale-bar {
+    display: flex;
+    height: 30px;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+}
+
+.segment {
+    flex: 1;
+    height: 100%;
+}
+
+/* Colours for task scale*/
+.scale-red         { background-color: #f44336; }
+.scale-orange      { background-color: #ff9800; }
+.scale-yellow      { background-color: #ffeb3b; flex: 2;}
+.scale-light-green { background-color: #8bc34a; }
+.scale-green       { background-color: #4caf50; }
+
+.scale-labels {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 5px;
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+}
+
+.red-pop-out-text{
+    margin-top: 20px;
+    background-color: var(--overdue);
+    text-align: center;
+    color: white;
+    border: transparent solid 8px;
+    border-radius: 20px;
+}
+
+.metric-segment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  padding: 10px 0;
+}
+
+.metric-value {
+  font-size: clamp(24px, 18cqi, 56px);
+  font-weight: 640;
+}
+
+.metric-divider {
+  border: 0;
+  border-top: 2px solid #333;
+  margin: 0;
+  width: 100%;
+}
+
+.task-gauge {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -60%);
+}
+
+.overdue-manager-general{
+    height: 17rem;
+}
+
+.graph-title
+{
+    position: relative;
+    background-color: white;
+    width: 100%;
+    max-width: 90%;
+}
+
+.graph-container {
+    position: relative;
+    width: 100%;
+    max-width: 90%;
+    height:30rem;
+    background-color: white;
+}
+
+.graph-general{
+    height:26rem !important;
+}
+
+.notify-buttons{
+    min-width: 49.5%;
+}
+
+.button-divider{
+    width: 1%;
+    height: 1px;
+}
+
+.warning-message{
+    background-color: var(--warning-bg-colour);
+    width: fit-content;
+}
+
+.fill-x{
+    width: -webkit-fill-available !important;
+}
+
+.fill-y{
+    height: -webkit-fill-available !important;
+}
+
+.overdue-tasks{
+    max-height: 16rem;
+}
+
+
+/* Temporary class to seperate different webpages ie. dashboard and login */
+
+.temp-panel {
+    width: 100%;
+    border: black solid 1px;
+    background-color: var(--bg-colour);
+}
+
+
+/* #endregion */
+
+/*
+----------------------------------
+
+    ID
+    CSS for specific objects identified by ID
+    
+-----------------------------------
+*/
+
+#banner {
+    width:60%;
+    max-width:95%;
+}
+
+#loading 
+{
+    display: inline-block;
+    transform: scale(1.5);
+    transform-origin: center;
+}
+
+#status {
+    margin-right: 0 !important;
+}
+
+/* Also in small and medium for responsive*/
+#user-task-count {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5cqw;
+}
+
+/* Also in small and medium for responsive*/
+#tasks-completed {
+    font-size: 1.5rem;
+    font-weight: 550;
+}
+
+#employee-general-top-row > div{
+    max-height: 20rem;
+}
+
+#manager-employee-top-row > div{
+    max-height: 30rem;
+}
+
+#manager-general-top-row > div{
+    max-height: 59rem;
+}
+
+#task-variance{
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+/* Indicator for task scale*/
+#task-scale-needle {
+    position: absolute;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: black;
+    transform: translateX(-50%);
+}
+
+/* Can be done in bootstrap but it needs to not have the !important*/
+#man-general{
+    display: flex;
+}
+
+/* Header */
+
+
+/*
+-------------------------
+
+Specific Object CSS
+
+------------------------
+*/
+
+/* Object Name */
